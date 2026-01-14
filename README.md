@@ -6,6 +6,7 @@ This project demonstrates a virtualized network security lab designed to simulat
 ## Network Architecture
 - Windows 10 host system running VirtualBox
 - pfSense firewall VM acting as the gateway between networks
+- Suricata IDS enabled on pfSense to monitor network traffic
 - Victim VM (Metasploitable) located on the internal LAN
 - Attacker VM (Kali Linux) used to generate controlled attack traffic
 - Segmented WAN and LAN networks with all traffic routed through pfSense
@@ -37,7 +38,7 @@ To evaluate the effectiveness of Suricata in this environment, two targeted dete
 - A service-focused attack pattern was generated to simulate attempts to interact with or abuse a network service. IDS visibility and firewall behavior were reviewed to assess how layered defenses handled application-level attack patterns.
 
 ## Key Findings
-- pfSense firewall rules successfully intercepted and blocked unauthorized connection attempts
+- Configured firewall rules successfully intercepted and blocked unauthorized connection attempts
 - Packet captures confirmed that malicious scanning traffic reached the firewall but did not reach the internal host
 - No IDS alerts were generated because traffic was blocked by the firewall before reaching IDS inspection
 
