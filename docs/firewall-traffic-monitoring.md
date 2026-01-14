@@ -3,11 +3,19 @@
 ## Objective
 The objective of this analysis is to evaluate firewall rule enforcement by observing how unauthorized traffic was handled at the firewall layer.
 
-## Test Methodology
+## Tests
 Traffic was generated from the Kali Linux attacker VM targeting the internal victim host (Metasploitable). The following tests were performed:
-1) TCP SYN scan targeting port 80
-2) ICMP echo requests
-3) SSH connection attempts targeting port 22
+1) TCP SYN scan targeting port 80 - tests whether HTTP-related traffic was permitted through the firewall:
+   
+   `sudo nmap -sS -p 80 192.168.56.194`
+   
+2) ICMP echo requests - tests basic network reachability:
+
+   `ping 192.168.56.194`
+   
+3) SSH connection attempts targeting port 22 - tests whether remote access to the internal host was allowed:
+
+   `sudo nmap -p 22 192.168.56.194`
 
 ## Observations
 1) Packet captures taken on the pfSense WAN interface showed repeated TCP SYN packets originating from the attacker IP and destined for the internal host. No SYN-ACK responses were observed. This behavior confirms that the firewall intercepted and blocked the connection attempts at the firewall, preventing the scan traffic from reaching the internal network. 
